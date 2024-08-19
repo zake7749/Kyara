@@ -1,7 +1,7 @@
 # Kyara: Knowledge Yielding Adaptive Retrieval Augmentation for LLM Fine-tuning
 
 <p align="left">
-    🤗 <a href="https://huggingface.co/zake7749/gemma-2-2b-it-chinese-kyara-dpo">Hugging Face</a>&nbsp ｜ 🚀<a href="https://github.com/zake7749/kyara">Github</a>&nbsp ｜ &nbsp📑 <a href="#">Paper</a>&nbsp ｜ &nbsp📖 <a href="#">English</a>
+    🤗 <a href="https://huggingface.co/zake7749/gemma-2-2b-it-chinese-kyara-dpo">Hugging Face</a>&nbsp ｜ 🚀<a href="https://github.com/zake7749/kyara">Github</a>&nbsp ｜ &nbsp📑 <a href="#">Paper</a>&nbsp ｜ &nbsp📖 <a href="https://github.com/zake7749/kyara/blob/main/document/README_EN.md">English</a>&nbsp | &nbsp📖 <a href="https://github.com/zake7749/kyara">Chinese</a>
 </p>
 <div style="text-align: center;">
   <img src="https://i.imgur.com/QiWlcYJ.jpeg" alt="kyara"/>
@@ -78,48 +78,37 @@ Kyara 支援 System Prompt, 可參考以下範例：
 #### Input
 
 ```
-messages = [
-    {'role': 'user', 'content': '什麼是大型語言模型？'}
-]
+System: 你是一個愛賣弄知識的人，總是喜歡引用典故，把簡單的事情說得非常複雜。
+User: 什麼是大型語言模型？
 ```
 
 #### Output
 
 ```
-大型語言模型（Large Language Models, LLMs）是一類深度學習模型，主要用於理解和生成自然語言文本。這些模型基於大量的語料數據進行訓練，並使用複雜的神經網絡架構，如Transformer架構。以下是一些關鍵特點和應用：
+大型語言模型（Large Language Model，簡稱LLM）是一種基於深度學習技術的自然語言處理（NLP）模型。這些模型通過大量文本數據進行訓練，以學習和生成人類語言。具體來說，它們屬於一種被稱為「變換器」（Transformer）的架構。
 
-1. **訓練數據龐大**：
-   - 大型語言模型通常需要處理數以百萬計甚至數十億個字詞和句子。這使它們能夠捕捉到語言中的豐富多樣性。
+變換器最初由Vaswani等人在2017年的論文《Attention is All You Need》中提出，這一架構因其在處理序列數據上的卓越性能而迅速風靡。變換器的核心思想是利用「自注意力機制」（Self-Attention Mechanism），這是一種能夠捕捉文本中不同單詞之間長距離依賴關係的方法。
 
-2. **Transformer架構**：
-   - Transformer架構在處理序列數據（如文本）時特別有效。它利用自注意力機制，能夠在生成文本過程中考慮到遠距離的依賴關係。
+大型語言模型通常具有以下幾個特徵：
 
-3. **預訓練和微調**：
-   - **預訓練**：最初在大規模未標註語料上進行訓練，以學習基本的語言結構和知識。
-   - **微調**：在特定任務或應用場景上進行細化訓練。
+1. **訓練數據量巨大**：這些模型通常需要數百GB甚至TB級的訓練數據，以捕捉語言的豐富性和多樣性。
 
-4. **應用範圍廣泛**：
-   - **文本生成**：如自動寫作、對話系統等。
-   - **語言翻譯**：自動翻譯文本。
-   - **問答系統**：回答用戶的提問。
-   - **文本分類**：自動歸類和篩選文本。
-   - **情感分析**：分析文本中的情感傾向。
+2. **模型規模龐大**：這意味著模型包含大量參數，常見的規模包括幾十億到數萬億個參數。這些參數的數量決定了模型的複雜度和生成文本的質量。
 
-5. **性能卓越**：
-   - 大型語言模型通常在多個自然語言處理（NLP）基準測試中表現出色，超越了許多先前的模型。
+3. **多語言能力**：現代的LLM如GPT-3、BERT等，不僅能夠處理多種語言，還能夠在不同語言之間轉換和理解上下文。
 
-幾個著名的例子包括GPT-3（由OpenAI開發）、BERT（由Google開發）和T5（由Google和Facebook開發）。
+4. **應用廣泛**：這些模型在文本生成、情感分析、問答系統、機器翻譯、摘要生成等多個NLP任務中都有廣泛應用。
 
-大型語言模型的發展標誌著NLP領域的一個重大突破，雖然它們有強大的能力，但同時也引發了一些倫理和安全方面的問題，如生成不準確或有害內容的風險。因此，研究人員正在不斷探索如何提高這些模型的準確性和安全性。
+例如，OpenAI的GPT-3包含1750億個參數，這使其成為一個極其強大的語言生成模型。BERT則以其雙向編碼器和掩碼語言建模技術，在多種下游任務中取得了卓越的成績。
+
+總結來說，大型語言模型通過大量數據訓練，利用複雜的深度學習架構，能夠生成高質量的自然語言文本，從而在各種NLP應用中發揮重要作用。
 ```
 
 #### Input
 
 ```
-messages = [
-    {'role': 'system', 'content': '你是一名小學老師，會用五歲小孩也能懂的口吻回答使用者的問題'},
-    {'role': 'user', 'content': '什麼是大型語言模型？'}
-]
+System: 你是一名小學老師，會用五歲小孩也能懂的口吻回答使用者的問題
+User: 什麼是大型語言模型？
 ```
 
 #### Output
@@ -137,6 +126,7 @@ messages = [
 
 希望這樣的解釋能讓你明白！有其他問題也可以隨時問我。
 ```
+
 
 ### Retrieval Augmented Generation (Experimental)
 
