@@ -1,7 +1,7 @@
 # Kyara: Knowledge Yielding Adaptive Retrieval Augmentation for LLM Fine-tuning
 
 <p align="left">
-    🤗 <a href="https://huggingface.co/zake7749/gemma-2-2b-it-chinese-kyara-dpo">Hugging Face</a>&nbsp ｜ 🚀<a href="https://github.com/zake7749/kyara">Github</a>&nbsp ｜ &nbsp📑 <a href="#">Paper</a>&nbsp ｜ &nbsp📖 <a href="https://github.com/zake7749/kyara/blob/main/document/README_EN.md">English</a>&nbsp | &nbsp📖 <a href="https://github.com/zake7749/kyara">Chinese</a>
+    🤗 <a href="https://huggingface.co/zake7749/gemma-2-2b-it-chinese-kyara-dpo">Hugging Face</a>&nbsp ｜ 🚀<a href="https://github.com/zake7749/kyara">Github</a>&nbsp ｜ &nbsp📑 <a href="#">Paper</a>&nbsp ｜ &nbsp📖 <a href="https://github.com/zake7749/kyara/blob/main/document/README_EN.md">English</a>&nbsp ｜ &nbsp📖 <a href="https://github.com/zake7749/kyara">Chinese</a>
 </p>
 <div style="text-align: center;">
   <img src="https://i.imgur.com/QiWlcYJ.jpeg" alt="kyara"/>
