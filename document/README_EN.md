@@ -59,12 +59,31 @@ All evaluations are based-on zero-shot.
 
 ### **Alignment Benchmark**
 
-| Metric                   | Kyara    | Gemma-2-2b-it |
+| Metric                   | Kyara-2b-it  | Gemma-2-2b-it |
 |--------------------------|----------|-------------|
-| **[AlpacaEval-LC](https://github.com/tatsu-lab/alpaca_eval)**        | **41.15**| 32.37       |
-| **[AlpacaEval](https://github.com/tatsu-lab/alpaca_eval)**           | **43.95**| 32.94       |
+| **[AlpacaEval LC Win Rate](https://github.com/tatsu-lab/alpaca_eval)**        | **41.15** | 32.37       |
+| **[AlpacaEval Win Rate](https://github.com/tatsu-lab/alpaca_eval)**           | **43.95** | 32.94       |
 | **[MT-Bench-TW](https://huggingface.co/datasets/MediaTek-Research/TCEval-v2)**          | **6.94** | 6.59        |
 | **[MT-Bench](https://huggingface.co/spaces/lmsys/mt-bench)**             | 7.92     | **8.17**    |
+| **[Chatbot-Arena-Hard](https://github.com/lm-sys/arena-hard-auto)**             | 18.9     | **19.4**    |
+
+#### [AlignBench](https://github.com/THUDM/AlignBench)
+
+| Fold                            | Kyara-2b-it-CHT | Kyara-2b-it-CHS | Gemma-2-2b-it |
+|---------------------------------|-----------------|-----------------|---------------|
+| Fundamental Language Ability    | 6.45 | **6.54** | 6.42 |
+| Advanced Chinese Understanding	 | **5.27** | 5.20 | 5.03 |
+| Open-ended Questions	          | 7.71 | **7.97** | 7.52 |
+| Writing Ability	                | 7.98 | **8.06** | 7.76 |
+| Logical Reasoning	             | **4.68** | 4.52 | 4.20 |
+| Mathematics	                   | **5.10** | 4.72 | 5.05 |
+| Task-oriented Role Play	       | 7.87 | **8.05** | 7.42 |
+| Professional Knowledge	       | **6.68** | 6.32 | 5.79 |
+| Reasoning AVG.                  | **4.89** | 4.62 | 4.63 |
+| Chinage Language AVG.           | 6.99 | **7.02** | 6.66 | 
+| Overall                         | **5.94** | 5.82 | 5.64 |
+
+where the postfixes CHT and CHS represent Traditional Chinese and Simplified Chinese, respectively. To evaluate the performance on Traditional Chinese in AlignBench, we used [OpenCC](https://github.com/BYVoid/OpenCC) with the `s2twp` configuration to convert all questions, evidence, and references from Simplified Chinese to Traditional Chinese.
 
 ## Feature
 
@@ -287,7 +306,7 @@ We followed the original design, using Kyara-SFT to generate a set of contrastiv
 
 ##### RLAIF
 
-資料集：[zake7749/kyara-chinese-preference-dpo-s0-30K](https://huggingface.co/datasets/zake7749/kyara-chinese-preference-dpo-s0-30K)
+Dataset: [zake7749/kyara-chinese-preference-dpo-s0-30K](https://huggingface.co/datasets/zake7749/kyara-chinese-preference-dpo-s0-30K)
 
 We extracted Chinese Prompts from `Magpie-Align/Magpie-Qwen2-Pro-200K-Chinese`, `hfl/stem_zh_instruction`, and `FreedomIntelligence/Evol-Instruct-Chinese-GPT4`, and distributed the same prompt to four different LLMs. The competitors include:
 
@@ -342,7 +361,7 @@ Like most models, Kyara still suffers from hallucinations, and possibly due to t
 如何解釋「俠者，不受名利所牽，但求俯仰無愧。正邪存乎在我，聲名留問諸君。非我桀傲不馴，乃因唐門薪火，自古如今！」
 ```
 
-The model would respond that this quote is from The "Legend of the Condor Heroes."
+However, the model would respond that this quote is from The "Legend of the Condor Heroes."
 
 ```
 這段話出自《射鵰英雄傳》中的唐門內部經典，由郭靖和黃蓉在唐門大殿上宣讀。這段話主要表達了唐門門人對於俠義精神和內在修為的追求，以及他們對外界的名利和聲名的不屑。以下是詳細解釋：
