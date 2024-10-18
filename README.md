@@ -7,37 +7,21 @@
   <img src="https://i.imgur.com/QiWlcYJ.jpeg" alt="kyara"/>
 </div>
 
-Kyara 是一個實驗性的語言模型微調策略，旨在通過知識檢索增強來有效擴展模型的知識範圍與語言理解能力。
+Kyara 是一個實驗性專案，旨在透過階段性的知識檢索產生合成資料，以增強語言模型的知識範圍與語言理解能力。目前，Kyara 的重心在於填補中文語料庫，尤其是繁體中文領域的空缺。與現今大量且多樣的英文語料相比，中文語料相對匱乏，這在語言模型的訓練與應用上形同一道難以逾越的高牆，限制了中文語言模型的發展潛力。
 
-與此同時，Kyara 也致力於填補中文語料庫，特別是繁體中文的空白。在當前語言模型研究中，英文資料豐富多樣，中文卻面臨語料匱乏的挑戰，這無疑為學術研究設立了一道難以逾越的高牆。
+為了驗證 Kyara 的有效性，我們對 Gemma-2-2b-it 進行了全參數微調，產生了首版的 Kyara 模型。初步評估結果可參考[Benchmark](#benchmark)，Kyara 在多個資料集中均優於原版的 `Gemma-2-2b-it`，並於中文的評估上取得了顯著的提升。
 
-為了驗證這一方法的有效性，我在 Gemma-2-2b-it 模型上進行了全參數微調，產生了第一版的 Kyara 模型。初步評估結果可參見 [Benchmark](#benchmark)。
-
-## Table of Content
+## Table of Contents
 
 - [Benchmark](#benchmark)
-   * [General Benchmark](#general-benchmark)
-   * [Alignment Benchmark](#alignment-benchmark)
+- [Usage](#usage)
 - [Method](#method)
-   * [Dataset Summary](#dataset-summary)
-   * [Dataset Construction](#dataset-construction)
-      + [Base Dataset: Knowledge Injection with Retrieval Augmentation](#base-dataset-knowledge-injection-with-retrieval-augmentation)
-         - [Chinese Math Dataset](#chinese-math-dataset)
-      + [High Quality Dataset: Model Refinement ](#high-quality-dataset-model-refinement)
-   * [Preference Learning](#preference-learning)
-      + [Chinese DPO](#chinese-dpo)
-         - [SPIN/SPPO](#spinsppo)
-         - [RLAIF](#rlaif)
 - [Feature](#feature)
-   * [Retrieval Augmented Generation (Experimental)](#retrieval-augmented-generation-experimental)
-      + [Input](#input)
-      + [Output](#output)
+- [Limitation](#limitation)
 
 ## Benchmark
 
 ### General Benchmark
-
-所有的評測皆採用 zero-shot 的方式進行。TMMLUPlus 分數聚合的方式沿用官方設計 (macro-average)。
 
 | Metric                   | Kyara-2b-it    | Gemma-2-2b-it |
 |--------------------------|----------|-------------|
@@ -53,6 +37,15 @@ Kyara 是一個實驗性的語言模型微調策略，旨在通過知識檢索�
 | **[ZebraLogic](https://github.com/yuchenlin/ZeroEval)**    | **5.2**| 4.2  |
 | **Chinese-Reason-Bench** | **4.21** | 3.44        |
 
+上述評測皆採 zero-shot 的方式進行評估。TMMLUPlus 分數聚合的策略同官方設計 (macro-average)。
+
+#### [Open-LLM Leaderboard](https://huggingface.co/spaces/open-llm-leaderboard/open_llm_leaderboard)
+
+目前 Kyara-2b-it 是 Open-LLM Leaderboard 上綜合分數排名最高的 2B 模型。
+
+<div style="text-align: center">
+  <img src="https://i.imgur.com/Jq3hbP1.png" alt="kyara-2b-it-open-llm-leaderboard">
+</div>
 
 ### Alignment Benchmark
 
@@ -80,7 +73,11 @@ Kyara 是一個實驗性的語言模型微調策略，旨在通過知識檢索�
 | 語言總分   | **7.26** | 6.94 | 6.66 | 6.73     |
 | 總分      | **6.44** | 5.90 | 5.64 | 5.91     |
 
-這裡的 CHT 和 CHS 分別代表繁體中文和簡體中文。為了能在 AlignBench 上評估繁體中文的表現，我們使用 [OpenCC](https://github.com/BYVoid/OpenCC) 配合 config `s2tw` 進行了簡繁轉換，將所有問題從簡體中文轉成了繁體中文。
+這裡的 CHT 和 CHS 分別代表繁體中文和簡體中文。為了能在 AlignBench 上評估繁體中文的表現，我們使用 [OpenCC](https://github.com/BYVoid/OpenCC) 配合 config `s2tw` 進行了簡易的簡繁轉換，將所有問題從簡體中文轉成了繁體中文。
+
+## 使用方式
+
+Kyara 採用了跟 Gemma2 一樣的架構，因此在推理上可以沿用 [Google 的官方教學](https://huggingface.co/google/gemma-2-2b-it)。除此之外，我們也在 Kaggle 上提供了一個 [Jupyter Notebook](https://www.kaggle.com/code/zake7749/kyara-a-compact-yet-powerful-chinese-llm) ，用於展示 Kyara 的各項基本功能，如寫作、摘要、開放式問答以及 RAG 等等。
 
 ## Method
 
