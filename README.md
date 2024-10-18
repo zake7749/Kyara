@@ -75,7 +75,7 @@ Kyara 是一個實驗性專案，旨在透過階段性的知識檢索產生合�
 
 這裡的 CHT 和 CHS 分別代表繁體中文和簡體中文。為了能在 AlignBench 上評估繁體中文的表現，我們使用 [OpenCC](https://github.com/BYVoid/OpenCC) 配合 config `s2tw` 進行了簡易的簡繁轉換，將所有問題從簡體中文轉成了繁體中文。
 
-## 使用方式
+## Usage
 
 Kyara 採用了跟 Gemma2 一樣的架構，因此在推理上可以沿用 [Google 的官方教學](https://huggingface.co/google/gemma-2-2b-it)。除此之外，我們也在 Kaggle 上提供了一個 [Jupyter Notebook](https://www.kaggle.com/code/zake7749/kyara-a-compact-yet-powerful-chinese-llm) ，用於展示 Kyara 的各項基本功能，如寫作、摘要、開放式問答以及 RAG 等等。
 
