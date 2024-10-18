@@ -1,41 +1,30 @@
 # Kyara: Knowledge Yielding Adaptive Retrieval Augmentation for LLM Fine-tuning
 
 <p align="left">
-    🤗 <a href="https://huggingface.co/zake7749/gemma-2-2b-it-chinese-kyara-dpo">Hugging Face</a>&nbsp ｜ 🚀<a href="https://github.com/zake7749/kyara">Github</a>&nbsp ｜ &nbsp📑 <a href="#">Paper</a>&nbsp ｜ &nbsp📖 <a href="https://github.com/zake7749/kyara/blob/main/document/README_EN.md">English</a>&nbsp ｜ &nbsp📖 <a href="https://github.com/zake7749/kyara">Chinese</a>
+    🤗 <a href="https://huggingface.co/zake7749/gemma-2-2b-it-chinese-kyara-dpo">Hugging Face</a>&nbsp; ｜ 🚀<a href="https://github.com/zake7749/kyara">Github</a>&nbsp; ｜ &nbsp;📑 <a href="#">Paper</a>&nbsp; ｜ &nbsp;📖 <a href="https://github.com/zake7749/kyara/blob/main/document/README_EN.md">English</a>&nbsp; ｜ &nbsp;📖 <a href="https://github.com/zake7749/kyara">Chinese</a>&nbsp; ｜ &nbsp;💻 <a href="https://www.kaggle.com/code/zake7749/kyara-a-compact-yet-powerful-chinese-llm">Kaggle Notebook</a>
 </p>
+
 <div style="text-align: center;">
   <img src="https://i.imgur.com/QiWlcYJ.jpeg" alt="kyara"/>
 </div>
 
 Kyara (Knowledge Yielding Adaptive Retrieval Augmentation) is an experimental project aimed at improving language models through knowledge retrieval processes. The project seeks to enhance the model’s ability to adapt knowledge and improve language comprehension, particularly in underrepresented languages like Traditional Chinese. Given the relatively scarce availability of Traditional Chinese data compared to the vast corpus of English data used for model training, Kyara addresses this gap by expanding the limited corpus for this language.
 
-To validate the effectiveness of Kyara, we performed full-parameter fine-tuning on `Gemma-2-2b-it`, resulting in the first iteration of the Kyara model. Initial evaluation results can be found in the [Benchmark](#benchmark) section.
+To validate Kyara's effectiveness, we conducted full-parameter fine-tuning on `Gemma-2-2b-it`, resulting in the first iteration of the Kyara model. Initial evaluation results, as detailed in the [Benchmark](#benchmark) section, demonstrate that Kyara outperforms the original `Gemma-2-2b-it` across various benchmarks, with notable improvements in Chinese language evaluations.
 
-## Table of Content
+## Table of Contents
 
 - [Benchmark](#benchmark)
-   * [General Benchmark](#general-benchmark)
-   * [Alignment Benchmark](#alignment-benchmark)
+- [Usage](#usage)
 - [Method](#method)
-   * [Dataset Summary](#dataset-summary)
-   * [Dataset Construction](#dataset-construction)
-      + [Base Dataset: Knowledge Injection with Retrieval Augmentation](#base-dataset-knowledge-injection-with-retrieval-augmentation)
-         - [Chinese Math Dataset](#chinese-math-dataset)
-      + [High Quality Dataset: Model Refinement ](#high-quality-dataset-model-refinement)
-   * [Preference Learning](#preference-learning)
-      + [Chinese DPO](#chinese-dpo)
-         - [SPIN/SPPO](#spinsppo)
-         - [RLAIF](#rlaif)
 - [Feature](#feature)
-   * [Retrieval Augmented Generation (Experimental)](#retrieval-augmented-generation-experimental)
-      + [Input](#input)
-      + [Output](#output)
+- [Limitation](#limitation)
 
 ## Benchmark
 
 ### General Benchmark
 
-All evaluations are based-on zero-shot.
+The following evaluations are based-on zero-shot.
 
 | Metric                   | Kyara-2b-it    | Gemma-2-2b-it |
 |--------------------------|----------|-------------|
@@ -52,6 +41,14 @@ All evaluations are based-on zero-shot.
 | **Chinese-Reason-Bench** | **4.21** | 3.44        |
 
  The aggregation method for the groups in TMMLUPlus is macro average, following the practice in the official implementation.
+
+#### [Open-LLM Leaderboard](https://huggingface.co/spaces/open-llm-leaderboard/open_llm_leaderboard)
+
+As of now, Kyara-2b-it is the leading competitor among all 2b-scale models on the OpenLLM Leaderboard.
+
+<div style="text-align: center">
+  <img src="https://i.imgur.com/Jq3hbP1.png" alt="kyara-2b-it-open-llm-leaderboard">
+</div>
 
 ### Alignment Benchmark
 
@@ -81,6 +78,10 @@ All evaluations are based-on zero-shot.
 
 where the postfixes CHT and CHS represent Traditional Chinese and Simplified Chinese, respectively. To evaluate the performance on Traditional Chinese in AlignBench, we used [OpenCC](https://github.com/BYVoid/OpenCC) with the `s2tw` configuration to convert all questions from Simplified Chinese to Traditional Chinese.
 
+## Usage
+
+Kyara adopts the same architecture as Gemma2, utilizing identical inference and training methods. We have created a [Jupyter Notebook](https://www.kaggle.com/code/zake7749/kyara-a-compact-yet-powerful-chinese-llm) on Kaggle to demonstrate Kyara’s basic functionality. For service-level deployment, we recommend using Sglang or vllm to achieve greater throughput and robustness.
+
 ## Method
 
 The following sections provide a brief summary of Kyara's implementation strategy.
@@ -99,7 +100,7 @@ We have collected a total of 3.6M conversations, approximately 4.51 billion toke
 
 ### Dataset Construction
 
-The data construction for Kyara is divided into two parts: English and Chinese. For the English part, we have incorporated multiple high-quality open-source datasets, such as `teknium/OpenHermes-2.5` and `arcee-ai/The-Tome`, and performing semantic deduplication to drop out near-similar examples. As for the Chinese part, the construction follows the process outlined below:
+The data construction for Kyara is divided into two parts: English and Chinese. For the English part, we have incorporated multiple high-quality open-source datasets, such as [teknium/OpenHermes-2.5](https://huggingface.co/datasets/teknium/OpenHermes-2.5) and [arcee-ai/The-Tome](https://huggingface.co/datasets/arcee-ai/The-Tome), and performing semantic deduplication to drop out near-similar examples. As for the Chinese part, the construction follows the process outlined below:
 
 #### Base Dataset: Knowledge Injection with Retrieval Augmentation
 
