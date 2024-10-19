@@ -1,7 +1,7 @@
 # Kyara: Knowledge Yielding Adaptive Retrieval Augmentation for LLM Fine-tuning
 
 <p align="left">
-    🤗 <a href="https://huggingface.co/zake7749/gemma-2-2b-it-chinese-kyara-dpo">Hugging Face</a>&nbsp ｜ 🚀<a href="https://github.com/zake7749/kyara">Github</a>&nbsp ｜ &nbsp📑 <a href="#">Paper</a>&nbsp ｜ &nbsp📖 <a href="https://github.com/zake7749/kyara/blob/main/document/README_EN.md">English</a>&nbsp ｜ &nbsp📖 <a href="https://github.com/zake7749/kyara">Chinese</a>
+    🤗 <a href="https://huggingface.co/zake7749/gemma-2-2b-it-chinese-kyara-dpo">Hugging Face</a>&nbsp ｜ 🚀<a href="https://github.com/zake7749/kyara">Github</a>&nbsp ｜ &nbsp📑 <a href="#">Paper</a>&nbsp ｜ &nbsp📖 <a href="https://github.com/zake7749/kyara/blob/main/document/README_EN.md">English</a>&nbsp ｜ &nbsp📖 <a href="https://github.com/zake7749/kyara">Chinese</a>&nbsp; ｜ &nbsp;💻 <a href="https://www.kaggle.com/code/zake7749/kyara-a-compact-yet-powerful-chinese-llm">Kaggle Notebook</a>
 </p>
 <div style="text-align: center;">
   <img src="https://i.imgur.com/QiWlcYJ.jpeg" alt="kyara"/>
@@ -53,9 +53,9 @@ Kyara 是一個實驗性專案，旨在透過階段性的知識檢索產生合�
 |--------------------------|----------|---------------|------------------|
 | **[AlpacaEval-LC](https://github.com/tatsu-lab/alpaca_eval)**                   | **35.35** | 32.37       | 19.30    |
 | **[AlpacaEval](https://github.com/tatsu-lab/alpaca_eval)**                      | **43.34** | 32.94       | 9.20     | 
+| **[Chatbot-Arena-Hard](https://github.com/lm-sys/arena-hard-auto)**             | **22.60** | 19.4        | 18.87    |
 | **[MT-Bench-TW](https://huggingface.co/datasets/MediaTek-Research/TCEval-v2)**  | **7.43**  | 6.35        | 7.10     |
 | **[MT-Bench](https://huggingface.co/spaces/lmsys/mt-bench)**                    | 8.28      | 8.17        | **8.32** |
-| **[Chatbot-Arena-Hard](https://github.com/lm-sys/arena-hard-auto)**             | **22.60** | 19.4        | 18.87    |
 
 #### [AlignBench](https://github.com/THUDM/AlignBench)
 
