@@ -9,7 +9,7 @@
 
 Kyara 是一個實驗性專案，旨在透過階段性的知識檢索產生合成資料，以增強語言模型的知識範圍與語言理解能力。目前，Kyara 的重心在於填補中文語料庫，尤其是繁體中文領域的空缺。與現今大量且多樣的英文語料相比，中文語料相對匱乏，這在語言模型的訓練與應用上形同一道難以逾越的高牆，限制了中文語言模型的發展潛力。
 
-為了驗證 Kyara 的有效性，我們對 Gemma-2-2b-it 進行了全參數微調，產生了首版的 Kyara 模型。初步評估結果可參考 [Benchmark](#benchmark)，Kyara 在多個資料集中均優於原版的 `Gemma-2-2b-it`，並於中文的評估上取得了顯著的提升。
+為了驗證 Kyara 的有效性，我們對 `Gemma-2-2b-it` 進行了全參數微調，產生了首版的 Kyara 模型。初步評估結果可參考 [Benchmark](#benchmark)，Kyara 在多個資料集中均優於原版的 `Gemma-2-2b-it`，並於中文的評估上取得了顯著的提升。
 
 ## Table of Contents
 
@@ -77,7 +77,23 @@ Kyara 是一個實驗性專案，旨在透過階段性的知識檢索產生合�
 
 ## Usage
 
-Kyara 採用了跟 Gemma2 一樣的架構，因此在推理上可以沿用 [Google 的官方教學](https://huggingface.co/google/gemma-2-2b-it)。除此之外，我們也在 Kaggle 上提供了一個 [Jupyter Notebook](https://www.kaggle.com/code/zake7749/kyara-a-compact-yet-powerful-chinese-llm) ，用於展示 Kyara 的各項基本功能，如寫作、摘要、開放式問答以及 RAG 等等。
+Kyara 採用了跟 Gemma2 一樣的架構，因此在推理上可以沿用 [Google 的官方教學]([https://huggingface.co/google/gemma-2-2b-it](https://huggingface.co/google/gemma-2-2b-it#usage))。除此之外，我們也在 Kaggle 上提供了一個 [Jupyter Notebook](https://www.kaggle.com/code/zake7749/kyara-a-compact-yet-powerful-chinese-llm) ，用於演示 Kyara 的各項基本功能，如寫作、摘要、開放式問答、數學計算以及 RAG 等各種情境。
+
+### Running with the `pipeline` API
+
+在安裝完 `transformers` 後，可用如下方式與模型互動： 
+
+```
+from transformers import pipeline
+
+pipe = pipeline("text-generation", model="zake7749/gemma-2-2b-it-chinese-kyara-dpo",)
+messages = [{"role": "user", "content": "你認為科技發展對於未來的工作形態會產生什麼樣的影響？為什麼？"},]
+result = pipe(messages, temperature=0.5, max_length=1024)
+
+print(result)
+
+# 科技發展對於未來的工作形態將產生深遠的影響，主要體現在以下幾個方面：\n\n1. **自動化與人工智慧**：\n   - **工作取代與轉型**：許多重複性高、規律性的工作（如製造業、客服等）可能會被自動化技術取代。這將促使企業重新考量工作性質，更多地依賴於需要創造力、情感智能和複雜決策的職位。\n   - **新興職位**：隨著自動化技術的普及，會出現新的職位需求，例如數據分析師、機器學習工程師和AI倫理專家等。\n\n2. **遠程工作與靈活工作模式**：\n   - **地理限制減少**：科技使得遠程工作成為可能，企業可以從全球範圍內招聘人才，這將改變傳統的工作模式，促進多元化和包容性。\n   - **彈性工作時間**：員工將有更大的彈性來安排自己的工作時間，這可能提高工作滿意度和生產力。\n\n3. **協作工具與平台**：\n   - **增強協作**：科技將促進團隊間的協作，使用雲端工具和即時通訊軟體，使跨地域的團隊能夠高效合作。\n   - **虛擬現實與增強現實**：這些技術可能改變會議和培訓的方式，提供更具沉浸感的體驗。\n\n4. **持續學習與技能提升**：\n   - **終身學習的必要性**：隨著技術的快速變化，員工需要不斷更新自己的技能，這將推動在線學習和終身學習的模式。\n   - **個性化學習路徑**：科技將提供更靈活的學習方式，根據個人的需求和興趣量身定制學習內容。\n\n5. **數據驅動的決策**：\n   - **決策過程的變革**：企業將越來越多地依賴數據分析來指導業務決策，這將改變傳統的管理和運營方式。\n\n6. **工作與生活的平衡**：\n   - **重新定義工作與生活**：科技的發展可能會影響人們對工作的看法，使人們更加重視工作與生活的平衡，從而可能減少加班和提高生活質量。\n\n總體而言，科技的發展將促使工作形態變得更加靈活、多樣化和以人為本，但也要求勞動者具備適應新技術和持續學習的能力。企業和個人都需要積極應對這些變化，以抓住新機會並減少潛在的挑戰。
+```
 
 ## Method
 
@@ -122,7 +138,7 @@ Kyara 的資料構建分為中英兩部分，英文的部分我們混用了眾�
 
 #### High Quality Dataset: Model Refinement 
 
-在使用上述資料完成監督學習後，我們會將 LLM 再一次微調於一個高品質的 subset 上，主要是為了處理以下三個問題：
+在使用 Base Dataset 完成監督式學習後，我們會再將 LLM 微調於一個高品質的 Subset 上，主要是為了處理以下三個問題：
 
 1. Base Dataset 中有些回應是由小型 LLM 生成的，有時在指令跟隨上表現不佳。
 2. 在實驗初期，我們混用了不同 LLM 以擴充知識多樣性和語言適應性。然而，在後續的評估中有發現不同 LLM 的 response template 以及行文思維有些微妙的差異，導致訓練後的 Chat Model 不太穩定。因此，我們引入了一個高品質的小型資料集，採用同一個 LLM 生成 QA Pairs。
