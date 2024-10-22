@@ -47,7 +47,7 @@ The following evaluations are based-on zero-shot.
 As of now, Kyara-2b-it is the leading competitor among all 2b-scale models on the OpenLLM Leaderboard.
 
 <div style="text-align: center">
-  <img src="https://i.imgur.com/Jq3hbP1.png" alt="kyara-2b-it-open-llm-leaderboard">
+  <img src="https://imgur.com/3NKhAja" alt="kyara-2b-it-open-llm-leaderboard">
 </div>
 
 ### Alignment Benchmark
