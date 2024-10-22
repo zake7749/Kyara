@@ -9,7 +9,7 @@
 
 Kyara 是一個實驗性專案，旨在透過階段性的知識檢索產生合成資料，以增強語言模型的知識範圍與語言理解能力。目前，Kyara 的重心在於填補中文語料庫，尤其是繁體中文領域的空缺。與現今大量且多樣的英文語料相比，中文語料相對匱乏，這在語言模型的訓練與應用上形同一道難以逾越的高牆，限制了中文語言模型的發展潛力。
 
-為了驗證 Kyara 的有效性，我們對 `Gemma-2-2b-it` 進行了全參數微調，產生了首版的 Kyara 模型。初步評估結果可參考 [Benchmark](#benchmark)，Kyara 在多個資料集中均優於原版的 `Gemma-2-2b-it`，並於中文的評估上取得了顯著的提升。
+為了驗證 Kyara 的有效性，我們對 `Gemma-2-2b-it` 進行了全參數微調，產生了首版的 Kyara 模型。初步評估結果可參考 [Benchmark](#benchmark)，Kyara 在多個中英資料集中均優於原版的 `Gemma-2-2b-it`，並在中文的評估上取得了顯著的提升。
 
 ## Table of Contents
 
@@ -44,7 +44,7 @@ Kyara 是一個實驗性專案，旨在透過階段性的知識檢索產生合�
 目前 Kyara-2b-it 是 Open-LLM Leaderboard 上綜合分數排名最高的 2B 模型。
 
 <div style="text-align: center">
-  <img src="https://i.imgur.com/Jq3hbP1.png" alt="kyara-2b-it-open-llm-leaderboard">
+  <img src="https://i.imgur.com/3NKhAja.png" alt="kyara-2b-it-open-llm-leaderboard">
 </div>
 
 ### Alignment Benchmark
@@ -73,15 +73,15 @@ Kyara 是一個實驗性專案，旨在透過階段性的知識檢索產生合�
 | 語言總分   | **7.26** | 6.94 | 6.66 | 6.73     |
 | 總分      | **6.44** | 5.90 | 5.64 | 5.91     |
 
-這裡的 CHT 和 CHS 分別代表繁體中文和簡體中文。為了能在 AlignBench 上評估繁體中文的表現，我們使用 [OpenCC](https://github.com/BYVoid/OpenCC) 配合 config `s2tw` 進行了簡易的簡繁轉換，將所有問題從簡體中文轉成了繁體中文。
+這裡的 CHT 和 CHS 分別代表以繁體中文評估，或是以簡體中文評估。為了能在 AlignBench 上評估繁體中文的表現，我們使用 [OpenCC](https://github.com/BYVoid/OpenCC) 配合 config `s2tw` 進行了簡易的簡繁轉換，將所有問題從簡體中文轉成了繁體中文。
 
 ## Usage
 
-Kyara 採用了跟 Gemma2 一樣的架構，因此在推理上可以沿用 [Google 的官方教學]([https://huggingface.co/google/gemma-2-2b-it](https://huggingface.co/google/gemma-2-2b-it#usage))。除此之外，我們也在 Kaggle 上提供了一個 [Jupyter Notebook](https://www.kaggle.com/code/zake7749/kyara-a-compact-yet-powerful-chinese-llm) ，用於演示 Kyara 的各項基本功能，如寫作、摘要、開放式問答、數學計算以及 RAG 等各種情境。
+Kyara 採用了和 Gemma2 一樣的架構，因此在推理上可以沿用 [Google 的官方教學]([https://huggingface.co/google/gemma-2-2b-it](https://huggingface.co/google/gemma-2-2b-it#usage))。此外，我們也在 Kaggle 上提供了一個 [Jupyter Notebook](https://www.kaggle.com/code/zake7749/kyara-a-compact-yet-powerful-chinese-llm) ，演示 Kyara 的各項基本功能，如寫作、摘要、開放式問答、數學計算以及 RAG 等各種情境。
 
 ### Running with the `pipeline` API
 
-在安裝完 `transformers` 後，可用如下方式與模型互動： 
+在安裝完 `transformers` 後，可用如下方式和模型互動： 
 
 ```
 from transformers import pipeline
@@ -117,28 +117,28 @@ Kyara 的資料構建分為中英兩部分，英文的部分我們混用了眾�
 
 我們基於開放中文知識型語料庫如 [bigscience-data-wikipedia](https://huggingface.co/datasets/bigscience-data/roots_zh-tw_wikipedia) 搭配 [QDrant](https://qdrant.tech/) 構建了一個知識搜尋系統，並透過以下流程構建 SFT Pairs:
 
-1. 迭代知識庫中的文本，針對該文本生成使用者可能詢問的知識密集型問題。
+1. 迭代知識庫中的文本，針對每篇文本生成使用者可能詢問的知識密集型問題。
 2. (可選) 基於 [Evol-Instruct](https://arxiv.org/pdf/2304.12244) 使指令複雜化，複雜化方向如：
     * 追問多個相關問題。
     * 針對原始問題進行逐步分析。
     * 要求特定的結構化輸出，如 JSON / Table。
-    * 添加情境假設，請模型在該假設下回答問題。
+    * 添加情境假設或背景故事，請模型在該假設下回答問題。
 3. 對於生成出的問題進行 Query Expansion，額外召回 Top K 篇相關文件，並個別判斷這些文件是否與原始任務相關：
     * 如果相關，請 LLM 針對問題摘要出重點資訊。
     * 如果無關，則忽略該份文件
 4. 請 LLM 閱讀原始文件以及至多 K 份重點資訊，撰寫詳盡且完整的回答。
 
-除此之外，針對高品質文本，我們會直接請 LLM 猜測可以透過哪些 prompt 使 LLM 產出這份文本，並將猜測出的 prompt 搭配高品質文本組成 SFT Pair。
+除此之外，針對高品質文本，我們會直接請 LLM 猜測可以透過哪些 prompt 產出這份文本，並將猜測出的 prompt 配合文本組成 SFT Pair。
 
 ##### Chinese Math Dataset
 
 * 資料集：[zake7749/kyara-chinese-math-sft-s0-30K](https://huggingface.co/datasets/zake7749/kyara-chinese-math-sft-s0-30K)
 
-上述策略雖然能廣泛生成知識性文本，但主要屬於資訊尋求（Information Seeking）的任務範疇，不太能有效構建數學與推理相關的語料。為此，我們基於 [PersonaHub](https://huggingface.co/datasets/proj-persona/PersonaHub) 產生了 5 萬則數學題，並借助 `Gemini-1.5-Flash` 濾除在計算與推理思維上明顯出錯的資料，以此構建出 [zake7749/kyara-chinese-math-sft-s0-30K](https://huggingface.co/datasets/zake7749/kyara-chinese-math-sft-s0-30K)
+上述策略雖然能廣泛生成知識性文本，但主要屬於資訊尋求（Information Seeking）的任務範疇，不太能有效構建數學與推理相關的語料。為此，我們基於 [PersonaHub](https://huggingface.co/datasets/proj-persona/PersonaHub) 產生了 5 萬則數學題，並借助 `Gemini-1.5-Flash` 濾除在計算與推理思維上明顯出錯的資料，以此構建出 [zake7749/kyara-chinese-math-sft-s0-30K](https://huggingface.co/datasets/zake7749/kyara-chinese-math-sft-s0-30K)，並將其混入 Base dataset 中進行第一階段的指令微調。
 
 #### High Quality Dataset: Model Refinement 
 
-在使用 Base Dataset 完成監督式學習後，我們會再將 LLM 微調於一個高品質的 Subset 上，主要是為了處理以下三個問題：
+在使用 Base Dataset 完成指令微調後，我們會再將訓練好的模型微調於一個高品質 Subset 上，主要是為了處理以下三個問題：
 
 1. Base Dataset 中有些回應是由小型 LLM 生成的，有時在指令跟隨上表現不佳。
 2. 在實驗初期，我們混用了不同 LLM 以擴充知識多樣性和語言適應性。然而，在後續的評估中有發現不同 LLM 的 response template 以及行文思維有些微妙的差異，導致訓練後的 Chat Model 不太穩定。因此，我們引入了一個高品質的小型資料集，採用同一個 LLM 生成 QA Pairs。
