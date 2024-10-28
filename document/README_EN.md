@@ -1,5 +1,7 @@
 # Kyara: Knowledge Yielding Adaptive Retrieval Augmentation for LLM Fine-tuning
 
+[![DOI](https://zenodo.org/badge/844304447.svg)](https://zenodo.org/badge/latestdoi/844304447)
+
 <p align="left">
     🤗 <a href="https://huggingface.co/zake7749/gemma-2-2b-it-chinese-kyara-dpo">Hugging Face</a>&nbsp; ｜ 🚀<a href="https://github.com/zake7749/kyara">Github</a>&nbsp; ｜ &nbsp;📑 <a href="#">Paper</a>&nbsp; ｜ &nbsp;📖 <a href="https://github.com/zake7749/kyara/blob/main/document/README_EN.md">English</a>&nbsp; ｜ &nbsp;📖 <a href="https://github.com/zake7749/kyara">Chinese</a>&nbsp; ｜ &nbsp;💻 <a href="https://www.kaggle.com/code/zake7749/kyara-a-compact-yet-powerful-chinese-llm">Kaggle Notebook</a>
 </p>
@@ -310,3 +312,17 @@ However, the model would respond that this quote is from The "Legend of the Cond
 ```
 
 It is recommended to exercise caution when using language models.
+
+## Citation
+
+```bibtex
+@software{Yang_Kyara_2024,
+  author = {Yang, Kai-Chou},
+  doi = {10.5281/zenodo.14001626},
+  month = oct,
+  title = {{Kyara}},
+  url = {https://github.com/zake7749/Kyara},
+  version = {1.0.0},
+  year = {2024}
+}
+```
