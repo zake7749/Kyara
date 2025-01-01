@@ -3,7 +3,7 @@
 [![DOI](https://zenodo.org/badge/844304447.svg)](https://zenodo.org/badge/latestdoi/844304447)
 
 <p align="left">
-    🤗 <a href="https://huggingface.co/zake7749/gemma-2-2b-it-chinese-kyara-dpo">Hugging Face</a>&nbsp ｜ 🚀<a href="https://github.com/zake7749/kyara">Github</a>&nbsp ｜ &nbsp📑 <a href="#">Paper</a>&nbsp ｜ &nbsp📖 <a href="https://github.com/zake7749/kyara/blob/main/document/README_EN.md">English</a>&nbsp ｜ &nbsp📖 <a href="https://github.com/zake7749/kyara">Chinese</a>&nbsp; ｜ &nbsp;💻 <a href="https://www.kaggle.com/code/zake7749/kyara-a-compact-yet-powerful-chinese-llm">Kaggle Notebook</a>
+    🤗 <a href="https://huggingface.co/collections/zake7749/kyara-673e129dbf93bea9ca87abeb">Hugging Face</a>&nbsp ｜ 🚀<a href="https://github.com/zake7749/kyara">Github</a>&nbsp ｜ &nbsp📑 <a href="#">Paper</a>&nbsp ｜ &nbsp📖 <a href="https://github.com/zake7749/kyara/blob/main/document/README_EN.md">English</a>&nbsp ｜ &nbsp📖 <a href="https://github.com/zake7749/kyara">Chinese</a>&nbsp; ｜ &nbsp;💻 <a href="https://www.kaggle.com/code/zake7749/kyara-a-compact-yet-powerful-chinese-llm">Kaggle Notebook</a>
 </p>
 <div style="text-align: center;">
   <img src="https://i.imgur.com/QiWlcYJ.jpeg" alt="kyara"/>
@@ -11,7 +11,7 @@
 
 Kyara 是一個實驗性專案，旨在透過階段性的知識檢索產生合成資料，以增強語言模型的知識範圍與語言理解能力。目前，Kyara 的重心在於填補中文語料庫，尤其是繁體中文領域的空缺。與現今大量且多樣的英文語料相比，中文語料相對匱乏，這在語言模型的訓練與應用上形同一道難以逾越的高牆，限制了中文語言模型的發展潛力。
 
-為了驗證 Kyara 的有效性，我們對 `Gemma-2-2b-it` 進行了全參數微調，產生了首版的 Kyara 模型。初步評估結果可參考 [Benchmark](#benchmark)，Kyara 在多個中英資料集中均優於原版的 `Gemma-2-2b-it`，並在中文的評估上取得了顯著的提升。
+為了驗證 Kyara 的有效性，我們對 `Gemma-2-2b-it` 等多個模型進行了全參數微調，產生了首版的 Kyara 模型。初步評估結果可參考 [Benchmark](#benchmark)，Kyara 在多個中英資料集中均優於基底模型，並在繁體中文的評估上取得了顯著的提升。
 
 ## Table of Contents
 
@@ -25,19 +25,19 @@ Kyara 是一個實驗性專案，旨在透過階段性的知識檢索產生合�
 
 ### General Benchmark
 
-| Metric                   | Kyara-2b-it    | Gemma-2-2b-it |
-|--------------------------|----------|-------------|
-| **[TMMLUPlus](https://huggingface.co/datasets/ikala/tmmluplus)**            | **41.98** | 36.73    |
-| &emsp;- STEM               | **43.73**   | 37.84      |
-| &emsp;- Humanities         | **38.72**   | 33.40      |
-| &emsp;- Other              | **40.61**   | 36.00      |
-| &emsp;- Social-Science     | **44.88**   | 39.69      |
-| **[MMLU-Redux](https://github.com/yuchenlin/ZeroEval)**    | **55.44**| 51.94       |
-| **[GSM8K](https://github.com/yuchenlin/ZeroEval)**         | **54.21**| 51.63       |
-| **[MATH-L5](https://github.com/yuchenlin/ZeroEval)**       | **8.88**| 4.3       |
-| **[CRUX](https://github.com/yuchenlin/ZeroEval)**          | **22.75**| 21.5     |
-| **[ZebraLogic](https://github.com/yuchenlin/ZeroEval)**    | **5.2**| 4.2  |
-| **Chinese-Reason-Bench** | **4.21** | 3.44        |
+| Metric                   | Kyara-2b-it    | Gemma-2-2b-it |  Kyara-9b-it   |  Gemma-2-9b-it     |
+|--------------------------|----------|-------------|-------------|-------------|
+| **[TMMLUPlus](https://huggingface.co/datasets/ikala/tmmluplus)**            | **41.98** | 36.73    | **59.87** | 54.77 |
+| &emsp;- STEM               | **43.73**   | 37.84      | **66.98**   | 58.12      |
+| &emsp;- Humanities         | **38.72**   | 33.40      | **54.42**   | 48.71      |
+| &emsp;- Other              | **40.61**   | 36.00      | **55.26**   | 51.43      |
+| &emsp;- Social-Science     | **44.88**   | 39.69      | **62.81**   | 60.84      |
+| **[MMLU-Redux](https://github.com/yuchenlin/ZeroEval)**    | **55.44**| 51.94       | 72.57| **72.82**    |
+| **[GSM8K](https://github.com/yuchenlin/ZeroEval)**         | **54.21**| 51.63       | **90.60**| 87.41     |
+| **[MATH-L5](https://github.com/yuchenlin/ZeroEval)**       | **8.88**| 4.3       | **28.71**|  19.42      |
+| **[CRUX](https://github.com/yuchenlin/ZeroEval)**          | **22.75**| 21.5     | **48.62**| 46.00     |
+| **[ZebraLogic](https://github.com/yuchenlin/ZeroEval)**    | **5.2**| 4.2  | **16.8** |   12.8    | 
+| **Chinese-Reason-Bench** | **4.21** | 3.44        |   **6.13**   |     4.96      |
 
 上述評測皆採 zero-shot 的方式進行評估。TMMLUPlus 分數聚合的策略同官方設計 (macro-average)。
 
@@ -51,13 +51,13 @@ Kyara 是一個實驗性專案，旨在透過階段性的知識檢索產生合�
 
 ### Alignment Benchmark
 
-| Metric                   | Kyara    | Gemma-2-2b-it | ChatGPT-3.5-1106 |
-|--------------------------|----------|---------------|------------------|
-| **[AlpacaEval-LC](https://github.com/tatsu-lab/alpaca_eval)**                   | **35.35** | 32.37       | 19.30    |
-| **[AlpacaEval](https://github.com/tatsu-lab/alpaca_eval)**                      | **43.34** | 32.94       | 9.20     | 
-| **[Chatbot-Arena-Hard](https://github.com/lm-sys/arena-hard-auto)**             | **22.60** | 19.4        | 18.87    |
-| **[MT-Bench-TW](https://huggingface.co/datasets/MediaTek-Research/TCEval-v2)**  | **7.43**  | 6.35        | 7.10     |
-| **[MT-Bench](https://huggingface.co/spaces/lmsys/mt-bench)**                    | 8.28      | 8.17        | **8.32** |
+| Metric                   | Kyara-2b-it    | Gemma-2-2b-it | ChatGPT-3.5-1106 |  Kyara-9b-it   |  Gemma-2-9b-it     |
+|--------------------------|----------------|---------------|------------------|----------------|--------------------|
+| **[AlpacaEval-LC](https://github.com/tatsu-lab/alpaca_eval)**                   | **35.35** | 32.37       | 19.30    | -        |   -    |
+| **[AlpacaEval](https://github.com/tatsu-lab/alpaca_eval)**                      | **43.34** | 32.94       | 9.20     | -        |   -    |
+| **[Chatbot-Arena-Hard](https://github.com/lm-sys/arena-hard-auto)**             | **22.60** | 19.4        | 18.87    | **41.1** |  33.6  |
+| **[MT-Bench-TW](https://huggingface.co/datasets/MediaTek-Research/TCEval-v2)**  | **7.43**  | 6.35        | 7.10     | **8.36** |  7.80  |
+| **[MT-Bench](https://huggingface.co/spaces/lmsys/mt-bench)**                    | 8.28      | 8.17        | 8.32     | **8.81** |  8.53  |
 
 #### [AlignBench](https://github.com/THUDM/AlignBench)
 
