@@ -25,19 +25,19 @@ Kyara 是一個實驗性專案，旨在透過階段性的知識檢索產生合�
 
 ### General Benchmark
 
-| Metric                   | Kyara-2b-it    | Gemma-2-2b-it |  Kyara-9b-it   |  Gemma-2-9b-it     |
+| Metric                   | [Kyara-2b-it](https://huggingface.co/zake7749/gemma-2-2b-it-chinese-kyara-dpo)    | [Gemma-2-2b-it](https://huggingface.co/google/gemma-2-2b-it) |  [Kyara-9b-it](https://huggingface.co/zake7749/gemma-2-9b-it-chinese-kyara)   |  [Gemma-2-9b-it](https://huggingface.co/google/gemma-2-9b-it)     |
 |--------------------------|----------|-------------|-------------|-------------|
-| **[TMMLUPlus](https://huggingface.co/datasets/ikala/tmmluplus)**            | **41.98** | 36.73    | **59.87** | 54.77 |
-| &emsp;- STEM               | **43.73**   | 37.84      | **66.98**   | 58.12      |
-| &emsp;- Humanities         | **38.72**   | 33.40      | **54.42**   | 48.71      |
-| &emsp;- Other              | **40.61**   | 36.00      | **55.26**   | 51.43      |
-| &emsp;- Social-Science     | **44.88**   | 39.69      | **62.81**   | 60.84      |
-| **[MMLU-Redux](https://github.com/yuchenlin/ZeroEval)**    | **55.44**| 51.94       | 72.57| **72.82**    |
-| **[GSM8K](https://github.com/yuchenlin/ZeroEval)**         | **54.21**| 51.63       | **90.60**| 87.41     |
-| **[MATH-L5](https://github.com/yuchenlin/ZeroEval)**       | **8.88**| 4.3       | **28.71**|  19.42      |
-| **[CRUX](https://github.com/yuchenlin/ZeroEval)**          | **22.75**| 21.5     | **48.62**| 46.00     |
-| **[ZebraLogic](https://github.com/yuchenlin/ZeroEval)**    | **5.2**| 4.2  | **16.8** |   12.8    | 
-| **Chinese-Reason-Bench** | **4.21** | 3.44        |   **6.13**   |     4.96      |
+| **[TMMLUPlus](https://huggingface.co/datasets/ikala/tmmluplus)**            | **41.98** | 36.73    | **60.74** | 54.77 |
+| &emsp;- STEM               | **43.73**   | 37.84      | **69.54**   | 58.12      |
+| &emsp;- Humanities         | **38.72**   | 33.40      | **52.64**   | 48.71      |
+| &emsp;- Other              | **40.61**   | 36.00      | **57.10**   | 51.43      |
+| &emsp;- Social-Science     | **44.88**   | 39.69      | **63.69**   | 60.84      |
+| **[MMLU-Redux](https://github.com/yuchenlin/ZeroEval)**    | **55.44**| 51.94       | **73.04**| 72.82    |
+| **[GSM8K](https://github.com/yuchenlin/ZeroEval)**         | **54.21**| 51.63       | **90.37**| 87.41     |
+| **[MATH-L5](https://github.com/yuchenlin/ZeroEval)**       | **8.88**| 4.3       | **31.35**|  19.42      |
+| **[CRUX](https://github.com/yuchenlin/ZeroEval)**          | **22.75**| 21.5     | **49.25**| 46.00     |
+| **[ZebraLogic](https://github.com/yuchenlin/ZeroEval)**    | **5.2**| 4.2  | **16.3** |   12.8    | 
+| **Chinese-Reason-Bench** | **4.21** | 3.44        |   **6.52**   |     4.96      |
 
 上述評測皆採 zero-shot 的方式進行評估。TMMLUPlus 分數聚合的策略同官方設計 (macro-average)。
 
@@ -53,9 +53,8 @@ Kyara 是一個實驗性專案，旨在透過階段性的知識檢索產生合�
 
 | Metric                   | Kyara-2b-it    | Gemma-2-2b-it | ChatGPT-3.5-1106 |  Kyara-9b-it   |  Gemma-2-9b-it     |
 |--------------------------|----------------|---------------|------------------|----------------|--------------------|
-| **[AlpacaEval-LC](https://github.com/tatsu-lab/alpaca_eval)**                   | **35.35** | 32.37       | 19.30    | -        |   -    |
-| **[AlpacaEval](https://github.com/tatsu-lab/alpaca_eval)**                      | **43.34** | 32.94       | 9.20     | -        |   -    |
-| **[Chatbot-Arena-Hard](https://github.com/lm-sys/arena-hard-auto)**             | **22.60** | 19.4        | 18.87    | **41.1** |  33.6  |
+| **[AlpacaEval-LC](https://github.com/tatsu-lab/alpaca_eval)**                   | **35.35** | 32.37       | 19.30    | 38.33    |  **48.41** |
+| **[Chatbot-Arena-Hard](https://github.com/lm-sys/arena-hard-auto)**             | **22.60** | 19.4        | 18.87    | **43.9** |  33.6  |
 | **[MT-Bench-TW](https://huggingface.co/datasets/MediaTek-Research/TCEval-v2)**  | **7.43**  | 6.35        | 7.10     | **8.36** |  7.80  |
 | **[MT-Bench](https://huggingface.co/spaces/lmsys/mt-bench)**                    | 8.28      | 8.17        | 8.32     | **8.81** |  8.53  |
 
