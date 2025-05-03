@@ -9,6 +9,8 @@
   <img src="https://i.imgur.com/QiWlcYJ.jpeg" alt="kyara"/>
 </div>
 
+🎉 News: 我們開放了一個 [Kaggle Notebook](https://www.kaggle.com/code/zake7749/kyara-retrieval-augmentation-for-llm-fine-tuning) 紀錄 Kyara-1.5 ~ Kyara-2.5 的研發思路
+
 Kyara 是一個實驗性專案，旨在透過階段性的知識檢索產生合成資料，以增強語言模型的知識範圍與語言理解能力。目前，Kyara 的重心在於填補中文語料庫，尤其是繁體中文領域的空缺。與現今大量且多樣的英文語料相比，中文語料相對匱乏，這在語言模型的訓練與應用上形同一道難以逾越的高牆，限制了中文語言模型的發展潛力。
 
 為了驗證 Kyara 的有效性，我們對 `Gemma-2-2b-it` 等多個模型進行了全參數微調，產生了首版的 Kyara 模型。初步評估結果可參考 [Benchmark](#benchmark)，Kyara 在多個中英資料集中均優於基底模型，並在繁體中文的評估上取得了顯著的提升。
