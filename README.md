@@ -3,17 +3,16 @@
 [![DOI](https://zenodo.org/badge/844304447.svg)](https://zenodo.org/badge/latestdoi/844304447)
 
 <p align="left">
-    🤗 <a href="https://huggingface.co/collections/zake7749/kyara-673e129dbf93bea9ca87abeb">Hugging Face</a>&nbsp ｜ 🚀<a href="https://github.com/zake7749/kyara">Github</a>&nbsp ｜ &nbsp📑 <a href="#">Paper</a>&nbsp ｜ &nbsp📖 <a href="https://github.com/zake7749/kyara/blob/main/document/README_EN.md">English</a>&nbsp ｜ &nbsp📖 <a href="https://github.com/zake7749/kyara">Chinese</a>&nbsp; ｜ &nbsp;💻 <a href="https://www.kaggle.com/code/zake7749/kyara-a-compact-yet-powerful-chinese-llm">Kaggle Notebook</a>
+    🤗 <a href="https://huggingface.co/collections/zake7749/kyara-673e129dbf93bea9ca87abeb">Hugging Face</a>&nbsp ｜ 🚀<a href="https://github.com/zake7749/kyara">Github</a>&nbsp ｜ &nbsp📑 <a href="https://medium.com/data-science-collective/kaggle-2nd-place-crafting-data-for-llm-success-09b4fd71d037">Solution</a>&nbsp ｜ &nbsp📖 <a href="https://github.com/zake7749/kyara/blob/main/document/README_EN.md">English</a>&nbsp ｜ &nbsp📖 <a href="https://github.com/zake7749/kyara">Chinese</a>&nbsp; ｜ &nbsp;💻 <a href="https://www.kaggle.com/code/zake7749/kyara-a-compact-yet-powerful-chinese-llm">Kaggle Notebook</a>
 </p>
 <div style="text-align: center;">
   <img src="https://i.imgur.com/QiWlcYJ.jpeg" alt="kyara"/>
 </div>
 
-🎉 News: 我們開放了一個 [Kaggle Notebook](https://www.kaggle.com/code/zake7749/kyara-retrieval-augmentation-for-llm-fine-tuning) 紀錄 Kyara-1.5 ~ Kyara-2.5 的研發思路
+---
 
-Kyara 是一個實驗性專案，旨在透過階段性的知識檢索產生合成資料，以增強語言模型的知識範圍與語言理解能力。目前，Kyara 的重心在於填補中文語料庫，尤其是繁體中文領域的空缺。與現今大量且多樣的英文語料相比，中文語料相對匱乏，這在語言模型的訓練與應用上形同一道難以逾越的高牆，限制了中文語言模型的發展潛力。
-
-為了驗證 Kyara 的有效性，我們對 `Gemma-2-2b-it` 等多個模型進行了全參數微調，產生了首版的 Kyara 模型。初步評估結果可參考 [Benchmark](#benchmark)，Kyara 在多個中英資料集中均優於基底模型，並在繁體中文的評估上取得了顯著的提升。
+🎉 **News:** Kyara achieved **2nd place** in the Kaggle competition [Google - Unlock Global Communication with Gemma](https://www.kaggle.com/competitions/gemma-language-tuning), an LLM tuning challenge with a \$150,000 prize pool.
+We’ve open-sourced both our [solution](https://medium.com/data-science-collective/kaggle-2nd-place-crafting-data-for-llm-success-09b4fd71d037) and our [training dataset](https://huggingface.co/datasets/zake7749/kyara-zh-sample-1M).
 
 ## Table of Contents
 
